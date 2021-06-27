@@ -1,0 +1,10 @@
+.navbar{
+  display: flex;
+  justify-content: space-around;
+
+  margin: 10px;
+
+}
+.navbar img{
+  width: 150px
+}

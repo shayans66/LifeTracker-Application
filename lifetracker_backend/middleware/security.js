@@ -38,7 +38,7 @@ const extractUserFromJwt = (req,res,next) => {
 
 // verify authed user exists
 const requireAuthenticatedUser = (req,res,next) => {
-  console.log('hiii');
+
   try{
     const { user } = res.locals
 

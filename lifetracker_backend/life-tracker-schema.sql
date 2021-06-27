@@ -11,6 +11,7 @@ CREATE TABLE exercise (
   category    TEXT NOT NULL,
   duration       INT NOT NULL,
   intensity       INT NOT NULL,
+  created_at  TIMESTAMP NOT NULL DEFAULT NOW(),
 
   user_id INT NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users (id)
@@ -22,6 +23,7 @@ CREATE TABLE nutrition (
   quantity       INT NOT NULL,
   calories       INT NOT NULL,
   IMGURL       TEXT NOT NULL,
+  created_at  TIMESTAMP NOT NULL DEFAULT NOW(),
 
   user_id INT NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users (id)
@@ -29,7 +31,8 @@ CREATE TABLE nutrition (
 CREATE TABLE sleep (
   id          SERIAL PRIMARY KEY,
   start_time  TIMESTAMP NOT NULL,
-  end_time  TIMESTAMP NOT NULL
+  end_time  TIMESTAMP NOT NULL,
+  created_at  TIMESTAMP NOT NULL DEFAULT NOW(),
 
   user_id INT NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users (id)
