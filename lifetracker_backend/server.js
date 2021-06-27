@@ -5,12 +5,10 @@ const { PORT } = require("./config")
 const { NotFoundError } = require("./utils/errors")
 const security = require('./middleware/security')
 
-const authRoutes = require("./routes/auth")
-const storeRoutes = require('./routes/store')
-const ordersRoutes = require('./routes/orders')
-
-
-
+const activityRoutes = require("./routes/activity")
+const exerciseRoutes = require('./routes/exercise')
+const nutritionRoutes = require('./routes/nutrition')
+const sleepRoutes = require('./routes/sleep')
 
 
 const app = express()
@@ -29,9 +27,11 @@ app.use(morgan("tiny"))
 app.use(security.extractUserFromJwt)
 
 
-app.use("/auth", authRoutes)
-app.use("/store", storeRoutes)
-app.use("/orders", ordersRoutes)
+app.use("/activity", activityRoutes)
+app.use("/exercise", exerciseRoutes)
+app.use("/nutrition", nutritionRoutes)
+app.use("/sleep", sleepRoutes)
+
 
 
 /** Handle 404 errors -- this matches everything */
