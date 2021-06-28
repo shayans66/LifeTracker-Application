@@ -8,3 +8,6 @@
 .navbar img{
   width: 150px
 }
+.navbar * {
+  text-decoration: none;
+}
