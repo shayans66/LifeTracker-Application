@@ -11,17 +11,61 @@ import Activity from '../Activity/Activity';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
+import axios from 'axios'
+import {useEffect, useState} from 'react'
+import apiClient from '../../services/apiClient';
+// import { login } from '../../../../lifetracker_backend/models/user';
+
 
 function App() {
+
+  const [user, setUser] = useState({})
+  const [error, setError] = useState('')
+  
+
+  useEffect(() => {
+
+    const fetchUser = async () => {
+      const {data, error} = await apiClient.fetchUserFromToken()
+      if(data) setUser(data.user)
+      if(error) {
+        console.error('error: ',error);
+        setError(error)
+      }
+    }
+    const token = localStorage.getItem(apiClient.getTokenName())
+
+    if(token){
+      console.log('token',token);
+      apiClient.setToken(token)
+      fetchUser()
+    }
+  }, [])
+
+  // async function checkIfLoggedIn(){
+  //   let res = await axios.get('http://localhost:3001/auth/me')
+  //   res = res.data
+
+  //   if(res.hasOwnProperty('user'))
+  //     setIsLoggedIn('true')
+  // }
+
+  const props = {
+    user,
+    setUser,
+    error,
+    setError
+  }
+
   return (
     <BrowserRouter>
       <div className="App">
         
-        <NavBar />
+        <NavBar {...props} />
 
         <Routes>
           <Route path="/" element={<Info />}>   </Route>
-          <Route path="/register" element={<Register />}>   </Route>
+          <Route path="/register" element={<Register {...props} />}>   </Route>
           <Route path="/login" element={<Login />}>   </Route>
           <Route path="/sleep" element={<Sleep />}>   </Route>
           <Route path="/nutrition" element={<Nutrition />}>   </Route>

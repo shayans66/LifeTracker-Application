@@ -1,8 +1,27 @@
 import React from "react";
 import "./NavBar.css";
 import { Link } from "react-router-dom";
+import apiClient from "../../services/apiClient";
+import { useState } from "react";
 
-export default function NavBar() {
+export default function NavBar(props) {
+
+
+  // console.log('islgedin',Object.keys(props.user).length > 0);
+
+  // console.log('user',props.user);
+  // console.log('user',Object.keys(props.user));
+
+  function handleLogOut(){
+    // local storage
+    const tokenName = apiClient.getTokenName()
+    localStorage[tokenName] = ''
+
+    // erase user
+    props.setUser({})
+
+  }
+
   return (
     <div className="navbar">
       <Link to={"/"}>
@@ -12,25 +31,34 @@ export default function NavBar() {
         />
       </Link>
 
-      <Link to={"/activity"}>
-        <p>Activity</p>
-      </Link>
-      <Link to={"/exercise"}>
-        <p>Exercise</p>
-      </Link>
-      <Link to={"/nutrition"}>
-        <p>Nutrition</p>
-      </Link>
-      <Link to={"/sleep"}>
-        <p>Sleep</p>
-      </Link>
-      <Link to={"/login"}>
-        <p>Login</p>
-      </Link>
+      <p>
+        <Link to={"/activity"}>Activity</Link>
+      </p>
 
-      <Link to={"register"}>
-        <p>Sign up</p>
-      </Link>
+      <p>
+        <Link to={"/exercise"}>Exercise</Link>
+      </p>
+      <p>
+        <Link to={"/nutrition"}>Nutrition</Link>
+      </p>
+      <p>
+        <Link to={"/Sleep"}>Sleep</Link>
+      </p>
+
+      {( Object.keys(props.user).length > 0 ) ? (
+        <Link to={"/"}>
+          <p onClick={() => {handleLogOut()}}>Logout</p>
+        </Link>
+      ) : (
+        <>
+          <Link to={"/login"}>
+            <p>Login</p>
+          </Link>
+          <Link to={"register"}>
+            <p>Sign up</p>
+          </Link>
+        </>
+      )}
     </div>
   );
 }

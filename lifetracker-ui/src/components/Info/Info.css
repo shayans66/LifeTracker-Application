@@ -19,7 +19,10 @@
 
 .Info .title{
   font-family: 'Dela Gothic One', cursive;
-  font-size: 100px;
+  font-size: 60px;
+
+
+
 }
 .Info img{
   position: relative;
@@ -33,6 +36,7 @@
   bottom: 120px;
 
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   align-items:center;
 

@@ -8,9 +8,10 @@ class User {
     return {
       id: user.id,
       email: user.email,
-      username: user.email,
-      isAdmin: user.is_admin,
-      createdAt: user.created_at,
+      password: user.password,
+      username: user?.username,
+      firstName: user?.first_name,
+      lasstName: user?.last_name,
     };
   }
 
@@ -34,7 +35,7 @@ class User {
   }
 
   static async register(credentials) {
-    const requiredFields = ["email", "password", "isAdmin", "name"];
+    const requiredFields = ["email", "password"];
     requiredFields.forEach((property) => {
       if (!credentials.hasOwnProperty(property)) {
         throw new BadRequestError(`Missing ${property} in request body.`);
@@ -60,16 +61,17 @@ class User {
     const normalizedEmail = credentials.email.toLowerCase();
 
     const userResult = await db.query(
-      `INSERT INTO users (email, password, username, name, is_admin)
+      `INSERT INTO users (email, password,
+        username, first_name, last_name)
        VALUES ($1, $2, $3, $4, $5)
-       RETURNING id, email, username, is_admin, created_at;
+       RETURNING id, email, password, username, first_name, last_name;
       `,
       [
         normalizedEmail,
         hashedPassword,
-        credentials.email,
-        credentials.name,
-        credentials.isAdmin,
+        credentials?.username || '',
+        credentials?.firstName || '',
+        credentials?.lastName || '',
       ]
     );
 
@@ -92,19 +94,6 @@ class User {
     return user;
   }
 
-  // static async fetchUserByUsername(username) {
-  //   if (!username) {
-  //     throw new BadRequestError("No username provided")
-  //   }
-
-  //   const query = `SELECT * FROM users WHERE username = $1`
-
-  //   const result = await db.query(query, [username])
-
-  //   const user = result.rows[0]
-
-  //   return user
-  // }
 }
 
 module.exports = User;

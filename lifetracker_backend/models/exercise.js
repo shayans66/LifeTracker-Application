@@ -17,13 +17,13 @@ class Exercise {
     const {name, category, duration, intensity} = exercise
 
     
-    let exercise = await db.query(`
+    let ex = await db.query(`
       INSERT INTO exercise(name,category,duration,intensity,user_id)
       VALUES($1, $2, $3, $4, (SELECT id FROM users WHERE email = $5) )
       RETURNING name,category,duration,intensity, user_id
     `, [name, category, duration, intensity, email])
 
-    return exercise.rows // [{},{},...]
+    return ex.rows // [{},{},...]
   }
 
 }

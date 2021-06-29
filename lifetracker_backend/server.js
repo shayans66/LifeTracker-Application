@@ -9,7 +9,7 @@ const activityRoutes = require("./routes/activity")
 const exerciseRoutes = require('./routes/exercise')
 const nutritionRoutes = require('./routes/nutrition')
 const sleepRoutes = require('./routes/sleep')
-
+const authRoutes = require('./routes/auth')
 
 const app = express()
 
@@ -31,6 +31,7 @@ app.use("/activity", activityRoutes)
 app.use("/exercise", exerciseRoutes)
 app.use("/nutrition", nutritionRoutes)
 app.use("/sleep", sleepRoutes)
+app.use("/auth", authRoutes)
 
 
 
