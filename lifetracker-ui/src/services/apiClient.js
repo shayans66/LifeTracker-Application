@@ -16,6 +16,7 @@ class ApiClient {
   }
 
   async request({ endpoint, method = `GET`, data = {} }) {
+    
     const url = `${this.remoteHostUrl}/${endpoint}`;
 
     const headers = {
@@ -24,16 +25,17 @@ class ApiClient {
     if (this.token) {
       headers["Authorization"] = `Bearer ${this.token}`;
     }
+    
 
     try {
-      // console.log('AXIOS CALL',{ url, method, data, headers });
+      console.log('AXIOS CALL',{ url, method, data, headers });
 
-      console.log('DATA: ',data);
+      // console.log('DATA: ',data);
 
 
       const res = await axios({ url, method, data, headers });
 
-      // console.log('AXIOS RES',res.data);
+      console.log('AXIOS RES',res.data);
 
       return { data: res.data, error: null };
     } catch (error) {
@@ -56,11 +58,14 @@ class ApiClient {
     return res
   }
   async loginUser(credentials){
+    
+    
     const res = await this.request({
       endpoint: "auth/login/",
       method: "POST",
       data: credentials,
     });
+
     return res
   }
 

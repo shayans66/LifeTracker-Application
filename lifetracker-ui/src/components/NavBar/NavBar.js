@@ -2,7 +2,7 @@ import React from "react";
 import "./NavBar.css";
 import { Link } from "react-router-dom";
 import apiClient from "../../services/apiClient";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 export default function NavBar(props) {
 
@@ -21,6 +21,17 @@ export default function NavBar(props) {
     props.setUser({})
 
   }
+  console.log('user: ',props.user);
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  // useEffect( () => {
+  //   setIsLoggedIn(Object.keys(props.user).length > 0)
+  // }, [props.user] )
+
+  // useEffect(() => {
+  //   setIsLoggedIn(Object.keys(props.user).length > 0)
+  // }, [])
 
   return (
     <div className="navbar">
@@ -46,6 +57,7 @@ export default function NavBar(props) {
       </p>
 
       {( Object.keys(props.user).length > 0 ) ? (
+
         <Link to={"/"}>
           <p onClick={() => {handleLogOut()}}>Logout</p>
         </Link>

@@ -21,6 +21,8 @@ function App() {
 
   const [user, setUser] = useState({})
   const [error, setError] = useState('')
+
+  console.log('user',user);
   
 
   useEffect(() => {
@@ -66,7 +68,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Info />}>   </Route>
           <Route path="/register" element={<Register {...props} />}>   </Route>
-          <Route path="/login" element={<Login />}>   </Route>
+          <Route path="/login" element={<Login {...props} />}>   </Route>
           <Route path="/sleep" element={<Sleep />}>   </Route>
           <Route path="/nutrition" element={<Nutrition />}>   </Route>
           <Route path="/exercise" element={<Exercise />}>   </Route>
