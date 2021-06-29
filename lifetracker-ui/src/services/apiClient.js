@@ -55,6 +55,14 @@ class ApiClient {
     });
     return res
   }
+  async loginUser(credentials){
+    const res = await this.request({
+      endpoint: "auth/login/",
+      method: "POST",
+      data: credentials,
+    });
+    return res
+  }
 
 }
 

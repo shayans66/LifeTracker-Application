@@ -1,6 +1,7 @@
 import React from "react";
 import "./Login.css";
 import { useState } from "react";
+import apiClient from "../../services/apiClient";
 
 
 export default function Login() {
@@ -14,7 +15,11 @@ export default function Login() {
     // if(!checkErrors())
     //   return
 
-      
+    const res = apiClient.loginUser({
+      email,
+      password
+    })
+    console.log(res.data);
 
   }
   // const checkErrors = () => {

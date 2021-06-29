@@ -5,7 +5,7 @@ const router = express.Router()
 
 const {createUserJwt} = require('../utils/tokens') // create jwt
 const security = require('../middleware/security') // middleware
-const { createOrder } = require("../models/activity")
+
 
 router.post("/login", async (req, res, next) => {
   try {

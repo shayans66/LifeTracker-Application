@@ -42,7 +42,7 @@ export default function NavBar(props) {
         <Link to={"/nutrition"}>Nutrition</Link>
       </p>
       <p>
-        <Link to={"/Sleep"}>Sleep</Link>
+        <Link to={"/sleep"}>Sleep</Link>
       </p>
 
       {( Object.keys(props.user).length > 0 ) ? (
