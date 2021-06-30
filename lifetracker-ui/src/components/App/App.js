@@ -73,6 +73,8 @@ function App() {
           <Route path="/nutrition" element={<Nutrition />}>   </Route>
           <Route path="/exercise" element={<Exercise />}>   </Route>
           <Route path="/activity" element={<Activity />}>   </Route>
+          
+          <Route path="/exercise/create" element={<Exercise />}>   </Route>
         </Routes>
         {/* <Info /> */}
 
