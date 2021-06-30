@@ -58,9 +58,14 @@ export default function Exercise() {
     }else if(error){
       setError(error)
     }
+  }
 
-    
 
+  const props = {
+    handleOnSubmitForm,
+    handleOnInputChange,
+    error,
+    handleStartCreateExercise,
   }
   return (
     <div className="exercise">
@@ -69,7 +74,21 @@ export default function Exercise() {
       </div>
 
       {isCreating ? (
-        <div className="createExercise">
+        <ExerciseCreateForm {...props}/>
+      ) : (
+        <Exercises {...props} />
+      )}
+    </div>
+  );
+}
+export function ExerciseCreateForm({
+  handleOnSubmitForm,
+  handleOnInputChange,
+  error,
+
+}){
+  return (
+    <div className="createExercise">
           <form onSubmit={handleOnSubmitForm}>
             <label>Name</label>
             <input onChange={handleOnInputChange} type="text" placeholder="Exercise name" name="name" />
@@ -91,13 +110,19 @@ export default function Exercise() {
             {/* <Link to="/exercise"><button>Save</button></Link> */}
           </form>
         </div>
-      ) : (
-        <div className="info">
+  )
+}
+export function Exercises({
+  handleOnSubmitForm,
+  handleOnInputChange,
+  error,
+  handleStartCreateExercise,
+}){
+  return (
+    <div className="info">
           <h3>Overview</h3>
           <button onClick={handleStartCreateExercise}>Add Exercise</button>
           {/* <Link to="create"><button onClick={handleStartCreateExercise}>Add Exercise</button></Link> */}
         </div>
-      )}
-    </div>
-  );
+  )
 }
