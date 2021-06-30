@@ -22,6 +22,8 @@ function App() {
   const [user, setUser] = useState({})
   const [error, setError] = useState('')
 
+  const [exercises, setExercises] = useState([])
+
   console.log('user',user);
   
 
@@ -35,12 +37,24 @@ function App() {
         setError(error)
       }
     }
+    const fetchExercises = async () => {
+      const {data, error} = apiClient.getExercisesForUser()
+      if(data){
+        setExercises(data.exercises)
+        console.log(exercises);
+      }else if(error){
+        console.error(error);
+      }
+    }
     const token = localStorage.getItem(apiClient.getTokenName())
 
     if(token){
-      console.log('token',token);
+      // console.log('token',token);
       apiClient.setToken(token)
       fetchUser()
+      fetchExercises()
+
+
     }
   }, [])
 
@@ -56,7 +70,9 @@ function App() {
     user,
     setUser,
     error,
-    setError
+    setError,
+    exercises,
+    setExercises
   }
 
   return (
@@ -71,7 +87,7 @@ function App() {
           <Route path="/login" element={<Login {...props} />}>   </Route>
           <Route path="/sleep" element={<Sleep />}>   </Route>
           <Route path="/nutrition" element={<Nutrition />}>   </Route>
-          <Route path="/exercise/*" element={<Exercise user={user} />}>   </Route>
+          <Route path="/exercise/*" element={<Exercise {...props} />  }>   </Route>
           <Route path="/activity" element={<Activity />}>   </Route>
 
 

@@ -5,25 +5,13 @@ import { useState,useEffect } from "react";
 import { func } from "prop-types";
 import apiClient from "../../services/apiClient";
 
-export default function Exercise({ user }) {
+export default function Exercise({ user, exercises, setExercises }) {
   const navigate = useNavigate()
 
   // const [isCreating, setIsCreating] = useState(false);
 
-  const [exercises, setExercises] = useState([])
-  useEffect(() => {
-    const fetchExercises = async () => {
-      const {data, error} = apiClient.getExercisesForUser()
-      if(data){
-        setExercises(data.exercises)
-        console.log(exercises);
-      }else if(error){
-        console.error(error);
-      }
-    }
-    fetchExercises()
-
-  }, [user])
+  
+  
 
   const [error, setError] = useState('')
 
