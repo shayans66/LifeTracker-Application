@@ -21,6 +21,12 @@ export default function Exercise() {
 
   function handleStartCreateExercise() {
     setIsCreating(true);
+    setForm({
+      name: '',
+      category: '',
+      duration: 1,
+      intensity: 1,
+    })
   }
 
   function handleOnInputChange(e){
