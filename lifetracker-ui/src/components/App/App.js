@@ -11,10 +11,10 @@ import Activity from '../Activity/Activity';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import axios from 'axios'
+
 import {useEffect, useState} from 'react'
 import apiClient from '../../services/apiClient';
-// import { login } from '../../../../lifetracker_backend/models/user';
+
 
 
 function App() {

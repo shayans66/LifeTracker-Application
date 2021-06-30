@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dela+Gothic+One&family=Noto+Sans+JP&display=swap');
+
+
+.exercise{
+  
+  font-family: 'Dela Gothic One', cursive;
+}
+.createExercise{
+  
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.exercise h2{
+  font-size: 60px;
+  text-align: center;
+}
+.exercise .banner{
+  background-color: aliceblue;
+  height: 100px;
+
+
+  margin: auto;
+}
+.exercise .info{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px;
+  
+}
+.exercise .info h3{
+  font-size: 40px;
+}
+.exercise .info button{
+  background-color: #f355a4; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  font-size: 16px;
+  cursor:pointer;
+  
+}
+.exercise .info a{
+  text-decoration: none;
+  color: white;
+  
+}
+.exercise .createExercise{
+  width: 400px;
+  margin: auto;
+
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  flex-direction: column;
+  padding: 20px;
+}
+.exercise .createExercise input{
+  margin: 0 10px 10px 0;
+}
+.exercise .createExercise input[type=text]{
+
+  height: 40px;
+  width: 400px;
+
+}
+.exercise .createExercise .same-line-inputs input{
+  width: 180px;
+  height: 40px;
+}
+.exercise .createExercise .same-line-inputs{
+  width: 400px;
+  display: flex;
+
+  justify-content: space-around;
+}
+.exercise .createExercise button{
+  background-color: yellow;
+  height: 50px;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  margin: 15px 0 15px 0;
+}

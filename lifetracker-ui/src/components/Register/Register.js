@@ -4,10 +4,9 @@ import "./Register.css";
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import axios from "axios";
 import apiClient from "../../services/apiClient";
 
-export default function Register( props ) {
+export default function Register(props) {
   let navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -26,7 +25,7 @@ export default function Register( props ) {
     // check if not ok
     if (!checkErrors()) return;
 
-    const {data, error} = await apiClient.signUpUser({
+    const { data, error } = await apiClient.signUpUser({
       email,
       password,
       username,
@@ -34,23 +33,19 @@ export default function Register( props ) {
       lastName,
     });
 
-    if(data?.user){
-      props.setUser(data.user) // user
-      apiClient.setToken(data.token) // jwt
+    if (data?.user) {
+      props.setUser(data.user); // user
+      apiClient.setToken(data.token); // jwt
       navigate("/activity/"); // redirect
     }
-    if(error){
+    if (error) {
       console.error(error);
-      setError(error)
+      setError(error);
     }
-    
-
-    
 
     console.log("res", data);
 
     // return <Redirect to='/activity' />
-    
   }
   // check if ok
   function checkErrors() {

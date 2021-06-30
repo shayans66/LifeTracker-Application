@@ -6,8 +6,8 @@ class ApiClient {
     this.token = null;
     this.tokenName = "life_tracker_token";
   }
-  getTokenName(){
-    return this.tokenName
+  getTokenName() {
+    return this.tokenName;
   }
 
   setToken(token) {
@@ -16,7 +16,6 @@ class ApiClient {
   }
 
   async request({ endpoint, method = `GET`, data = {} }) {
-    
     const url = `${this.remoteHostUrl}/${endpoint}`;
 
     const headers = {
@@ -25,23 +24,21 @@ class ApiClient {
     if (this.token) {
       headers["Authorization"] = `Bearer ${this.token}`;
     }
-    
 
     try {
-      console.log('AXIOS CALL',{ url, method, data, headers });
+      console.log("AXIOS CALL", { url, method, data, headers });
 
       // console.log('DATA: ',data);
 
-
       const res = await axios({ url, method, data, headers });
 
-      console.log('AXIOS RES',res.data);
+      console.log("AXIOS RES", res.data);
 
       return { data: res.data, error: null };
     } catch (error) {
       console.error({ errorResponse: error.response });
       const message = error?.response?.data?.error?.message;
-      console.log(message,error);
+      console.log(message, error);
 
       return { data: null, error: message || String(error) };
     }
@@ -49,26 +46,40 @@ class ApiClient {
   async fetchUserFromToken() {
     return await this.request({ endpoint: `auth/me`, method: `GET` });
   }
-  async signUpUser(credentials){
+  async signUpUser(credentials) {
     const res = await this.request({
       endpoint: "auth/register/",
       method: "POST",
       data: credentials,
     });
-    return res
+    return res;
   }
-  async loginUser(credentials){
-    
-    
+  async loginUser(credentials) {
     const res = await this.request({
       endpoint: "auth/login/",
       method: "POST",
       data: credentials,
     });
 
-    return res
+    return res;
   }
+  async getExercisesForUser(){
+    const res = await this.request({
+      endpoint: "exercise/",
+      method: "GET",
 
+    });
+    return res;
+  }
+  async createExerciseForUser(credentials){
+    const res = await this.request({
+      endpoint: "exercise/create",
+      method: "POST",
+      data: credentials,
+    });
+    return res;
+  }
+  
 }
 
 export default new ApiClient(
