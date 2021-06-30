@@ -10,9 +10,9 @@ router.get('/', requireAuthenticatedUser, async (req,res,next) => {
 
   try{
     const { user } = res.locals
-    const products = await Exercise.getExercisesForUser(user)
+    const exercises = await Exercise.getExercisesForUser(user)
     return res.status(200).json({
-      orders : products
+      exercises : exercises
     })
   }catch(err){
     next(err)
@@ -24,9 +24,9 @@ router.post('/create', requireAuthenticatedUser, async (req,res,next) => {
   try{
     const { user } = res.locals
     const exDetails = req.body.exercise
-    const products = await Exercise.addExerciseForUser(user, exDetails)
+    const newEx = await Exercise.addExerciseForUser(user, exDetails)
     return res.status(200).json({
-      orders : products
+      exercise : newEx
     })
   }catch(err){
     next(err)

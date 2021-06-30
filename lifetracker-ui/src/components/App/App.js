@@ -71,7 +71,7 @@ function App() {
           <Route path="/login" element={<Login {...props} />}>   </Route>
           <Route path="/sleep" element={<Sleep />}>   </Route>
           <Route path="/nutrition" element={<Nutrition />}>   </Route>
-          <Route path="/exercise" element={<Exercise />}>   </Route>
+          <Route path="/exercise/*" element={<Exercise user={user} />}>   </Route>
           <Route path="/activity" element={<Activity />}>   </Route>
 
 

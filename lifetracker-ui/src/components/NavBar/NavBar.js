@@ -23,7 +23,7 @@ export default function NavBar(props) {
   }
   console.log('user: ',props.user);
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
 
   // useEffect( () => {
   //   setIsLoggedIn(Object.keys(props.user).length > 0)

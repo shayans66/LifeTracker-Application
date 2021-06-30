@@ -1,14 +1,29 @@
 import React from "react";
 import "./Exercise.css";
-import { Routes, Route, Link } from "react-router-dom";
-import { useState } from "react";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import { useState,useEffect } from "react";
 import { func } from "prop-types";
 import apiClient from "../../services/apiClient";
 
-export default function Exercise() {
+export default function Exercise({ user }) {
+  const navigate = useNavigate()
+
   // const [isCreating, setIsCreating] = useState(false);
-  const [isCreating, setIsCreating] = useState(false);
+
   const [exercises, setExercises] = useState([])
+  useEffect(() => {
+    const fetchExercises = async () => {
+      const {data, error} = apiClient.getExercisesForUser()
+      if(data){
+        setExercises(data.exercises)
+        console.log(exercises);
+      }else if(error){
+        console.error(error);
+      }
+    }
+    fetchExercises()
+
+  }, [user])
 
   const [error, setError] = useState('')
 
@@ -20,13 +35,17 @@ export default function Exercise() {
   })
 
   function handleStartCreateExercise() {
-    setIsCreating(true);
+
     setForm({
       name: '',
       category: '',
       duration: 1,
       intensity: 1,
     })
+    // setIsCreating(true);
+    navigate('create')
+
+    
   }
 
   function handleOnInputChange(e){
@@ -54,7 +73,8 @@ export default function Exercise() {
     console.log({data, error});
     if(data){
       setExercises(arr => ([...arr, data]))
-      setIsCreating(false)
+      // setIsCreating(false)
+      navigate('/exercise')
     }else if(error){
       setError(error)
     }
@@ -73,11 +93,15 @@ export default function Exercise() {
         <h2>Exercise</h2>
       </div>
 
-      {isCreating ? (
+      {/* {isCreating ? (
         <ExerciseCreateForm {...props}/>
       ) : (
         <Exercises {...props} />
-      )}
+      )} */}
+      <Routes>
+        <Route path="" element={ <Exercises {...props} /> } />
+        <Route path="create" element={ <ExerciseCreateForm {...props} /> } />
+      </Routes>
     </div>
   );
 }
