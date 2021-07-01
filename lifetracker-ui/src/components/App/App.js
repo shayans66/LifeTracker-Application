@@ -23,9 +23,9 @@ function App() {
   const [error, setError] = useState('')
 
   const [exercises, setExercises] = useState([])
-  console.log('exercises',exercises);
-
-  console.log('user',user);
+  const [nutrition, setNutrition] = useState([])
+  const [sleep, setSleep] = useState([])
+  
   
 
   const fetchExercises = async () => {
@@ -78,6 +78,10 @@ function App() {
     exercises,
     setExercises,
     fetchExercises,
+    nutrition,
+    setNutrition,
+    sleep,
+    setSleep,
   }
 
   return (
@@ -92,10 +96,10 @@ function App() {
           <Route path="/" element={<Info />}>   </Route>
           <Route path="/register" element={<Register {...props} />}>   </Route>
           <Route path="/login" element={<Login {...props} />}>   </Route>
-          <Route path="/sleep" element={<Sleep />}>   </Route>
-          <Route path="/nutrition" element={<Nutrition />}>   </Route>
+          <Route path="/sleep" element={<Sleep {...props} />}>   </Route>
+          <Route path="/nutrition" element={<Nutrition {...props} />}>   </Route>
           <Route path="/exercise/*" element={<Exercise {...props} />  }>   </Route>
-          <Route path="/activity" element={<Activity />}>   </Route>
+          <Route path="/activity" element={<Activity {...props} />}>   </Route>
 
 
         </Routes>

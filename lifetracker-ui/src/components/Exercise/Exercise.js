@@ -2,7 +2,7 @@ import React from "react";
 import "./Exercise.css";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import { useState,useEffect } from "react";
-import { func } from "prop-types";
+
 import apiClient from "../../services/apiClient";
 import {v4 as uuid} from 'uuid'
 

@@ -7,6 +7,7 @@ class Nutrition {
     let nutrition = await db.query(`
       SELECT * FROM nutrition 
       WHERE user_id = (SELECT id FROM users WHERE email = $1)
+      RETURNING *
     `, [email])
 
     return nutrition.rows // [{},{},...]
@@ -19,7 +20,7 @@ class Nutrition {
     let nutrition = await db.query(`
       INSERT INTO nutrition(name, category, quantity, calories, imgurl, user_id)
       VALUES($1, $2, $3, $4, $5, (SELECT id FROM users WHERE email = $6) )
-      RETURNING name, category, quantity, calories, imgurl, user_id
+      RETURNING *
     `, [name, category, quantity, calories, imgurl, email])
 
     return nutrition.rows // [{},{},...]
