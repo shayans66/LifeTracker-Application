@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dela+Gothic+One&family=Noto+Sans+JP&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+.activity{
+  font-family: 'Dela Gothic One', cursive;
+}
+.activity .topbar{
+  display: flex;
+  align-items: center;
+  justify-content:space-around;
+}
+.activity .topbar button{
+
+  height: 50px;
+  background-color: yellow;
+  border: 2px solid orange;
+  margin: 10px;
+  cursor: pointer;
+  
+}
+.activity .topbar a{
+
+  text-decoration: none;
+  color: black;
+  
+}
+.activity .cards{
+  /* color: white; */
+  font-family:Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-wrap: wrap;
+}
+.activity .card{
+  /* color: white; */
+  background-color: #f355a4;
+  width: 360px;
+  height: 220px;
+  margin: 20px;
+  padding:  0 10px 10px 10px;
+
+  border-radius: 25px;
+  font-family: 'Kanit', sans-serif;
+}

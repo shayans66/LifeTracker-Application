@@ -7,18 +7,22 @@ const {createUserJwt} = require('../utils/tokens') // create jwt
 const security = require('../middleware/security') // middleware
 const { createOrder } = require("../models/activity")
 const Activity = require("../models/activity")
+const { requireAuthenticatedUser } = require('../middleware/security')
 
-router.get("/", async (req, res, next) => {
+router.get("/", requireAuthenticatedUser, async (req, res, next) => {
   try{
     const { user } = res.locals
     const totExercises = await Activity.getTotalExerciseForUser(user)
     const avgIntensity = await Activity.getAverageIntensityForUser(user)
 
-    let analytics = {exercise: [], nutrition: [], sleep: []}
-    analytics.exercise.push({
-      totalExerciseMinutes: totExercises,
-      maximumHourlyCalories: avgIntensity
-    })
+    // let analytics = {exercise: [], nutrition: [], sleep: []}
+    // analytics.exercise.push({
+    //   totalExerciseMinutes: totExercises,
+    //   maximumHourlyCalories: avgIntensity
+    // })
+    let analytics = {exercise: {}, nutrition: {}, sleep: {}}
+    analytics.exercise.totalExerciseMinutes = totExercises
+    analytics.exercise.maximumHourlyCalories = avgIntensity
 
 
     return res.status(200).json({

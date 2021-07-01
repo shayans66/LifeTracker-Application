@@ -10,7 +10,8 @@ class Activity {
         WHERE user_id = (SELECT id FROM users WHERE email = $1)
     `, [email])
 
-    return quer.rows[0]
+    // console.log('quer',quer);
+    return quer.rows[0].sum
   }
   static async getAverageIntensityForUser(user){
     const email = user.email
@@ -21,7 +22,7 @@ class Activity {
         WHERE user_id = (SELECT id FROM users WHERE email = $1)
     `, [email])
 
-    return quer.rows[0]
+    return quer.rows[0].avg
   }
 
 

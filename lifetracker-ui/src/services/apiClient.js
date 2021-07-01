@@ -81,11 +81,11 @@ class ApiClient {
     });
     return res;
   }
-  async getActivityForUser(credentials){
+  async getActivityForUser(){
     const res = await this.request({
       endpoint: "activity/",
       method: "GET",
-      data: credentials,
+
     });
     return res;
   }
