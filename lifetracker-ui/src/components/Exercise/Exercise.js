@@ -4,6 +4,7 @@ import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import { useState,useEffect } from "react";
 import { func } from "prop-types";
 import apiClient from "../../services/apiClient";
+import {v4 as uuid} from 'uuid'
 
 export default function Exercise({ user, exercises, setExercises }) {
   const navigate = useNavigate()
@@ -140,16 +141,22 @@ export function Exercises({
       <h3>Overview</h3>
       <button onClick={handleStartCreateExercise}>Add Exercise</button>
     </div>
+    <div className="cards">
       {
         exercises.map((exercise) => (
-          <div>
-           {exercise.name}
-          {exercise.category}
-          {exercise.duration}
-          {exercise.intensity}
+          <div key={uuid()} className="card">
+
+            <p style={{fontSize: '30px'}}><b>{exercise.name}</b></p> 
+            <p style={{float: "right",marginRight: '40px',border:'2px solid green',padding:'5px'}}>Category: {exercise.category}</p> 
+            <p>Duration: {exercise.duration}</p> 
+            <p>Intensity: {exercise.intensity}</p> 
+            <p>{exercise.created_at.substring(0,exercise.created_at.indexOf('T'))} </p><br/>
+            <br/>
+
           </div>
         ))
       }
+    </div>
     </>
   )
 }

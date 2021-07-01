@@ -20,7 +20,7 @@ class Exercise {
     let ex = await db.query(`
       INSERT INTO exercise(name,category,duration,intensity,user_id)
       VALUES($1, $2, $3, $4, (SELECT id FROM users WHERE email = $5) )
-      RETURNING name,category,duration,intensity, user_id
+      RETURNING *
     `, [name, category, duration, intensity, email])
 
     return ex.rows // [{},{},...]
