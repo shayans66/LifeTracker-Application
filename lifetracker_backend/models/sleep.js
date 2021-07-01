@@ -5,7 +5,7 @@ class Sleep {
     const { email } = user
     
     let sleeps = await db.query(`
-      SELECT * FROM sleep 
+      SELECT * FROM sleep
       WHERE user_id = (SELECT id FROM users WHERE email = $1)
     `, [email])
 
@@ -19,10 +19,10 @@ class Sleep {
     let sleep = await db.query(`
       INSERT INTO sleep(start_time, end_time, user_id)
       VALUES($1, $2 (SELECT id FROM users WHERE email = $3) )
-      RETURNING start_time, end_time, user_id
+      RETURNING *
     `, [start_time, end_time, email])
 
-    return sleep.rows // [{},{},...]
+    return sleep.rows[0] // [{},{},...]
   }
 
 }

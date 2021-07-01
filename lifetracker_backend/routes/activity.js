@@ -6,15 +6,25 @@ const router = express.Router()
 const {createUserJwt} = require('../utils/tokens') // create jwt
 const security = require('../middleware/security') // middleware
 const { createOrder } = require("../models/activity")
+const Activity = require("../models/activity")
 
-router.post("/login", async (req, res, next) => {
-  try {
-    const user = await User.login(req.body)
+router.get("/", async (req, res, next) => {
+  try{
+    const { user } = res.locals
+    const totExercises = await Activity.getTotalExerciseForUser(user)
+    const avgIntensity = await Activity.getAverageIntensityForUser(user)
 
-    const token = createUserJwt(user) // make token
-    
-    return res.status(200).json({ user, token })
-  } catch (err) {
+    let analytics = {exercise: [], nutrition: [], sleep: []}
+    analytics.exercise.push({
+      totalExerciseMinutes: totExercises,
+      maximumHourlyCalories: avgIntensity
+    })
+
+
+    return res.status(200).json({
+      activity: analytics
+    })
+  }catch(err){
     next(err)
   }
 })

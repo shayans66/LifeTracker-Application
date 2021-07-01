@@ -23,7 +23,7 @@ class Nutrition {
       RETURNING *
     `, [name, category, quantity, calories, imgurl, email])
 
-    return nutrition.rows // [{},{},...]
+    return nutrition.rows[0] // [{},{},...]
   }
 
 }

@@ -23,7 +23,7 @@ class Exercise {
       RETURNING *
     `, [name, category, duration, intensity, email])
 
-    return ex.rows // [{},{},...]
+    return ex.rows[0] // [{},{},...]
   }
 
 }
