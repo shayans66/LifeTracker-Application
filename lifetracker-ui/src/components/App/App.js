@@ -40,6 +40,7 @@ function App() {
     }
   }
   useEffect(() => {
+    console.log('swagg');
 
     const fetchUser = async () => {
       const {data, error} = await apiClient.fetchUserFromToken()

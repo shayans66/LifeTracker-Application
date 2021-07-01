@@ -7,7 +7,7 @@ class Nutrition {
     let nutrition = await db.query(`
       SELECT * FROM nutrition 
       WHERE user_id = (SELECT id FROM users WHERE email = $1)
-      RETURNING *
+
     `, [email])
 
     return nutrition.rows // [{},{},...]

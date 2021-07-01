@@ -1,10 +1,11 @@
 
 
 const express = require('express')
-const { default: Nutrition } = require('../../lifetracker-ui/src/components/Nutrition/Nutrition')
+const Nutrition = require('../models/nutrition')
 const router = express.Router()
+const { requireAuthenticatedUser } = require('../middleware/security')
 
-router.get('/', async (req,res,next) => {
+router.get('/',requireAuthenticatedUser, async (req,res,next) => {
   try{
     const { user } = res.locals
     const nutritions = await Nutrition.getNutritionsForUser(user)
@@ -15,7 +16,7 @@ router.get('/', async (req,res,next) => {
     next(err)
   }
 })
-router.get('/create', async (req,res,next) => {
+router.post('/create', requireAuthenticatedUser, async (req,res,next) => {
   try{
     const { user } = res.locals
     const newNut = req.body.nutrition
