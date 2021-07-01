@@ -60,7 +60,7 @@ export default function Exercise({ user, exercises, setExercises }) {
     })
     console.log({data, error});
     if(data){
-      setExercises(arr => ([...arr, data]))
+      setExercises(arr => ([...arr, data])) // maybe rm
       // setIsCreating(false)
       navigate('/exercise')
     }else if(error){
@@ -74,6 +74,7 @@ export default function Exercise({ user, exercises, setExercises }) {
     handleOnInputChange,
     error,
     handleStartCreateExercise,
+    exercises,
   }
   return (
     <div className="exercise">
@@ -97,6 +98,7 @@ export function ExerciseCreateForm({
   handleOnSubmitForm,
   handleOnInputChange,
   error,
+  exercises
 
 }){
   return (
@@ -129,12 +131,25 @@ export function Exercises({
   handleOnInputChange,
   error,
   handleStartCreateExercise,
+  exercises,
 }){
+  console.log(exercises);
   return (
+    <>
     <div className="info">
-          <h3>Overview</h3>
-          <button onClick={handleStartCreateExercise}>Add Exercise</button>
-          {/* <Link to="create"><button onClick={handleStartCreateExercise}>Add Exercise</button></Link> */}
-        </div>
+      <h3>Overview</h3>
+      <button onClick={handleStartCreateExercise}>Add Exercise</button>
+    </div>
+      {
+        exercises.map((exercise) => (
+          <div>
+           {exercise.name}
+          {exercise.category}
+          {exercise.duration}
+          {exercise.intensity}
+          </div>
+        ))
+      }
+    </>
   )
 }

@@ -23,10 +23,22 @@ function App() {
   const [error, setError] = useState('')
 
   const [exercises, setExercises] = useState([])
+  console.log('exercises',exercises);
 
   console.log('user',user);
   
 
+  const fetchExercises = async () => {
+    const {data, error} = await apiClient.getExercisesForUser()
+    console.log('{data, error} ',{data, error} );
+    if(data){
+
+      setExercises(data.exercises)
+      console.log(exercises);
+    }else if(error){
+      console.error(error);
+    }
+  }
   useEffect(() => {
 
     const fetchUser = async () => {
@@ -37,15 +49,7 @@ function App() {
         setError(error)
       }
     }
-    const fetchExercises = async () => {
-      const {data, error} = apiClient.getExercisesForUser()
-      if(data){
-        setExercises(data.exercises)
-        console.log(exercises);
-      }else if(error){
-        console.error(error);
-      }
-    }
+    
     const token = localStorage.getItem(apiClient.getTokenName())
 
     if(token){
@@ -72,7 +76,8 @@ function App() {
     error,
     setError,
     exercises,
-    setExercises
+    setExercises,
+    fetchExercises,
   }
 
   return (
@@ -80,6 +85,8 @@ function App() {
       <div className="App">
         
         <NavBar {...props} />
+
+
 
         <Routes>
           <Route path="/" element={<Info />}>   </Route>

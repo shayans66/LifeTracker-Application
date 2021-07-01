@@ -32,6 +32,8 @@ export default function Login(props) {
       props.setUser(data.user)
       
       apiClient.setToken(data.token)
+      
+      props.fetchExercises()
 
       navigate('/activity')
 

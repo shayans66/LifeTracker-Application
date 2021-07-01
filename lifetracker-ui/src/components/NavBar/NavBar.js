@@ -16,7 +16,8 @@ export default function NavBar(props) {
     // local storage
     const tokenName = apiClient.getTokenName()
     localStorage[tokenName] = ''
-
+    props.setExercises([])
+    
     // erase user
     props.setUser({})
 
