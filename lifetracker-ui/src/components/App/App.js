@@ -82,12 +82,13 @@ function App() {
     setError,
     exercises,
     setExercises,
+    fetchUser,
     fetchExercises,
     nutrition,
     setNutrition,
     sleep,
     setSleep,
-    fetchUser,
+
     activity,
     setActivity,
   };

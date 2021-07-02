@@ -9,9 +9,11 @@ export default function Activity(props) {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if(JSON.stringify(props.user) === '{}')
+      if(JSON.stringify(props.user) === '{}')
       navigate('/login')
-  }, [])
+    },[])
+    
+
 
   const analytics = props.activity.activity
   return (
@@ -35,7 +37,7 @@ export default function Activity(props) {
         </div>
 
 
-        <p style={{'font-size':'30px','font-family': 'Dela Gothic One, cursive'}}>More Stats</p>
+        <p style={{'font-size':'30px','fontFamily': 'Dela Gothic One, cursive'}}>More Stats</p>
 
         <div className="more-stats cards">
           <div className="card">
