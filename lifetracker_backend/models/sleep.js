@@ -18,7 +18,7 @@ class Sleep {
     
     let sleep = await db.query(`
       INSERT INTO sleep(start_time, end_time, user_id)
-      VALUES($1, $2 (SELECT id FROM users WHERE email = $3) )
+      VALUES($1, $2, (SELECT id FROM users WHERE email = $3) )
       RETURNING *
     `, [start_time, end_time, email])
 
