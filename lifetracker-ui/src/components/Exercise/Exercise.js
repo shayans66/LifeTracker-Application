@@ -45,8 +45,9 @@ export default function Exercise({ user, exercises, setExercises }) {
   }
 
   function handleOnInputChange(e){
-    
+
     setForm((f) => ({...f, [e.target.name]: e.target.value}))
+
   }
   async function handleOnSubmitForm(e){
     e.preventDefault()
@@ -68,8 +69,9 @@ export default function Exercise({ user, exercises, setExercises }) {
     })
     console.log({data, error});
     if(data){
-      setExercises(arr => ([...arr, data])) // maybe rm
-      // setIsCreating(false)
+      // setExercises(arr => ([...arr, data])) 
+      setExercises(arr => ([...arr, data.exercise])) 
+
       navigate('/exercise')
     }else if(error){
       setError(error)
@@ -124,7 +126,7 @@ export function ExerciseCreateForm({
               </div>
               <div>
                 <label>Intensity (1-10)</label>
-                <input onChange={handleOnInputChange} type="number" name="intensity" value="1" />
+                <input  onChange={handleOnInputChange} type="number" name="intensity" defaultValue="1" />
               </div>
             </div>
 
@@ -158,7 +160,8 @@ export function Exercises({
             <p style={{float: "right",marginRight: '40px',border:'2px solid green',padding:'5px'}}>Category: {exercise.category}</p> 
             <p>Duration: {exercise.duration}</p> 
             <p>Intensity: {exercise.intensity}</p> 
-            <p>{exercise.created_at.substring(0,exercise.created_at.indexOf('T'))} </p><br/>
+            {/* <p>{exercise.created_at.substring(0,exercise.created_at.indexOf('T'))} </p><br/> */}
+            <p>{exercise.created_at} </p><br/>
             <br/>
 
           </div>

@@ -20,7 +20,7 @@ function App() {
   const [nutrition, setNutrition] = useState([]);
   const [sleep, setSleep] = useState([]);
 
-  const [activity, setActivity] = useState({})
+  const [activity, setActivity] = useState({});
 
   const fetchExercises = async () => {
     const { data, error } = await apiClient.getExercisesForUser();
@@ -32,13 +32,12 @@ function App() {
       console.error(error);
     }
   };
-  async function fetchActivity(){
-
-    const {data, error} = await apiClient.getActivityForUser()
-    console.log({data, error});
+  async function fetchActivity() {
+    const { data, error } = await apiClient.getActivityForUser();
+    console.log({ data, error });
     if (data) {
-      setActivity(data)
-      console.log('ACTIVITYDATa',data);
+      setActivity(data);
+      console.log("ACTIVITYDATa", data);
     } else if (error) {
       console.error(error);
     }
@@ -55,8 +54,6 @@ function App() {
   useEffect(() => {
     console.log("swagg");
 
-    
-
     const token = localStorage.getItem(apiClient.getTokenName());
 
     if (token) {
@@ -64,9 +61,9 @@ function App() {
       apiClient.setToken(token);
       fetchUser();
       fetchExercises();
-      fetchActivity()
+      fetchActivity();
 
-      console.log('ACTIVITY',activity);
+      console.log("ACTIVITY", activity);
     }
   }, []);
 
