@@ -6,6 +6,8 @@ import { useState,useEffect } from "react";
 import apiClient from "../../services/apiClient";
 import {v4 as uuid} from 'uuid'
 
+
+
 export default function Exercise({ user, exercises, setExercises }) {
   const navigate = useNavigate()
 
@@ -22,6 +24,11 @@ export default function Exercise({ user, exercises, setExercises }) {
     duration: 1,
     intensity: 1,
   })
+
+  useEffect(() => {
+    if(JSON.stringify(user) === '{}')
+      navigate('/login')
+  }, [])
 
   function handleStartCreateExercise() {
 
@@ -77,6 +84,7 @@ export default function Exercise({ user, exercises, setExercises }) {
     handleStartCreateExercise,
     exercises,
   }
+  
   return (
     <div className="exercise">
       <div className="banner">
